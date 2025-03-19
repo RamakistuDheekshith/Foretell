@@ -9,8 +9,8 @@ RSpec.describe WeatherForecastController, type: :controller do
   let(:forecast_data) do
     {
       "current" => { "temperature_2m" => 22, "windspeed_10m" => 5, "weather_code" => 1 },
-      "hourly" => { "temperature_2m" => [22, 21, 20], "windspeed_10m" => [5, 4, 3], "relative_humidity_2m" => [60, 65, 70] },
-      "daily" => { "temperature_2m_max" => [24, 23, 22], "temperature_2m_min" => [15, 14, 13], "weather_code" => [1, 2, 3] }
+      "hourly" => { "temperature_2m" => [ 22, 21, 20 ], "windspeed_10m" => [ 5, 4, 3 ], "relative_humidity_2m" => [ 60, 65, 70 ] },
+      "daily" => { "temperature_2m_max" => [ 24, 23, 22 ], "temperature_2m_min" => [ 15, 14, 13 ], "weather_code" => [ 1, 2, 3 ] }
     }
   end
   let(:valid_coordinates) { { lat: latitude, lon: longitude } }
@@ -23,7 +23,7 @@ RSpec.describe WeatherForecastController, type: :controller do
 
     context 'when latitude and longitude are provided' do
       it 'returns a successful response' do
-        get :forecast, params: { :latitude => latitude, :longitude => longitude }
+        get :forecast, params: { latitude: latitude, longitude: longitude }
         expect(response).to have_http_status(:ok)
       end
 
@@ -91,7 +91,7 @@ RSpec.describe WeatherForecastController, type: :controller do
   describe '#get_location_details' do
     context 'when geocoding is successful' do
       it 'returns latitude and longitude' do
-        allow(Geocoder).to receive(:search).with(:valid_location).and_return([OpenStruct.new(data: { "lat" => latitude, "lon" => longitude })])
+        allow(Geocoder).to receive(:search).with(:valid_location).and_return([ OpenStruct.new(data: { "lat" => latitude, "lon" => longitude }) ])
         result = controller.send(:get_location_details, :valid_location)
         expect(result).to eq({ lat: latitude, lon: longitude })
       end
