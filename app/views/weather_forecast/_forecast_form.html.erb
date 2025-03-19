@@ -1,0 +1,48 @@
+<style>
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-container div {
+  display: flex;
+  align-items: center;
+}
+
+.form-container label {
+  margin-right: 10px;
+}
+
+.form-container input {
+  min-width: 200px; 
+}
+
+</style>
+
+<%= form_tag forecast_path, method: :get do %>
+  <div class= 'form-container'>
+    <div>
+      <%= label_tag :city, "Enter location address:" %>
+      <%= text_field_tag :location %>
+    </div>
+    <br>
+    <h2> Or </h2>
+    <br>
+    <div>
+      <div>
+        <%= label_tag :latitude, "Latitude:" %>
+        <%= text_field_tag :latitude %>
+      </div>
+      <br>
+      <div>
+        <%= label_tag :longitude, "Longitude:" %>
+        <%= text_field_tag :longitude %>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div>
+    <%= submit_tag "Forecast Weather for Location" %>
+  </div>
+<% end %>

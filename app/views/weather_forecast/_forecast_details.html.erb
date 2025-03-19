@@ -1,0 +1,79 @@
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+
+  h1, h2 {
+    color: #007bff;
+  }
+
+  div {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .d-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .d-flex > div {
+    flex: 1 1 200px; /* Distribute items evenly, with a minimum width */
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+</style>
+
+<% if @cached == true %>
+  <h1>Forecasting weather from cached data for <%= params[:location] %></h1>
+<% else %>
+  <h1>Forecasting weather for <%= params[:location] %></h1>
+<% end %>
+<br>
+<div>
+  <h2>Current Weather</h2>
+  <p>Time: <%= @forecast_data.current.item.time %></p>
+  <p>Temperature: <%= @forecast_data.current.item.temperature_2m %> °C</p>
+  <p>Wind speed: <%= @forecast_data.current.item.windspeed_10m %> m/s</p>
+  <p>Weather condition: <%= @forecast_data.current.item.weather_code_symbol %></p>
+</div>
+<br>
+<div>
+  <h2>Daily Weather</h2>
+  <div class="d-flex">
+    <% @forecast_data.daily.items.each do |item| %>
+      <div>
+        <p>Time: <%= item.time %></p>
+        <p>Max. Temperature: <%= item.temperature_2m_max %> °C</p>
+        <p>Min. Temperature: <%= item.temperature_2m_min %> °C</p>
+        <p>Weather condition: <%= item.weather_code_symbol %> </p>
+      </div>
+    <% end %>
+  </div>
+</div>
+<br>
+<div>
+  <h2>Hourly Weather</h2>
+  <div class="d-flex">
+    <% @forecast_data.hourly.items.each do |item| %>
+      <div>
+        <p>Time: <%= item.time %></p>
+        <p>Temperature: <%= item.temperature_2m %> °C</p>
+        <p>Humidity: <%= item.relative_humidity_2m %>%</p>
+        <p>Wind Speed: <%= item.windspeed_10m %> m/s</p>
+      </div>
+    <% end %>
+  </div>
+</div>

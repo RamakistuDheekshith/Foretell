@@ -1,0 +1,9 @@
+<h1>Get Weather Forecast</h1>
+
+<%= render :partial => 'forecast_form' %>
+
+<% if !@forecast_data.blank? %>
+<%= render :partial => 'forecast_details' %>
+<% else %>
+  <p>Enter location details to get weather forecast.</p>
+<% end %>
