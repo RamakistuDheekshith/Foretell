@@ -1,3 +1,41 @@
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+
+  h1, h2 {
+    color: #007bff;
+  }
+
+  div {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .d-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .d-flex > div {
+    flex: 1 1 200px; /* Distribute items evenly, with a minimum width */
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+</style>
+
 <h1>Get Weather Forecast</h1>
 
 <%= render :partial => 'forecast_form' %>
